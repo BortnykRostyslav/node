@@ -1,0 +1,47 @@
+{
+  "name": "booking",
+  "version": "1.0.0",
+  "description": "Hello friend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
+    "prod": "pm2 start app.js --name server --watch --attach"
+  },
+  "author": "Bortnyk Rostyslav",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "aws-sdk": "^2.1304.0",
+    "bcrypt": "^5.1.0",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "module-alias": "^2.2.2",
+    "mongoose": "^6.8.2",
+    "morgan": "^1.10.0",
+    "nanoid": "^4.0.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.0",
+    "nodemailer-express-handlebars": "^6.0.0",
+    "pm2": "^5.2.2",
+    "socket.io": "^4.6.1",
+    "swagger-ui-express": "^4.6.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/email-templates": "^10.0.1",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/nodemailer": "^6.4.7",
+    "@types/nodemailer-express-handlebars": "^4.0.2",
+    "nodemon": "^2.0.20",
+    "prettier": "2.8.3"
+  },
+  "_moduleAliases": {
+    "@error": "./errors/ApiError",
+    "@configs": "./configs"
+  }
+}

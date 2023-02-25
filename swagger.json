@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1",
+    "title": "Rocket"
+  },
+  "paths": {
+    "/api/users":{
+      "get": {
+        "description": "Get all users",
+        "tags": ["Users"],
+        "operationId": "getAllUsers",
+        "parameters": [
+          {
+            "type": "number",
+            "in": "query",
+            "name": "perPage",
+            "default": 20
+          },
+          {
+            "type": "number",
+            "in": "query",
+            "name": "Page",
+            "default": 1
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization",
+            "description": "Age grater that equals",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SuccessResponse",
+            "schema": {
+              "properties": {
+                "page": {
+                  "type": "number",
+                  "example": 2
+                },
+                "perPage": {
+                  "type": "number",
+                  "example": 25
+                },
+                "count": {
+                  "type": "number",
+                  "example": 125
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/singleUser"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create new users",
+        "tags": ["Users"],
+        "operationId": "createdUser",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User was created",
+            "schema": {
+
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "description": "getUserById",
+        "tags": ["Users"],
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/singleUser"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "singleUser": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "MongoID"
+        },
+        "email": {
+          "type": "string",
+          "example": "john_doe@example.com"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        }
+      }
+    },
+    "errorResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "here will be an error message"
+        }
+      }
+    }
+  }
+}
