@@ -2,10 +2,10 @@
   "name": "booking",
   "version": "1.0.0",
   "description": "Hello friend",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
-    "prod": "pm2 start app.js --name server --watch --attach"
+    "dev": "nodemon --inspect=0.0.0.0:9229 server.js",
+    "prod": "pm2 start server.js --name server --watch --attach"
   },
   "author": "Bortnyk Rostyslav",
   "license": "ISC",
@@ -32,13 +32,19 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/email-templates": "^10.0.1",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/mongoose": "^5.11.97",
     "@types/nodemailer": "^6.4.7",
     "@types/nodemailer-express-handlebars": "^4.0.2",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.20",
-    "prettier": "2.8.3"
+    "prettier": "2.8.3",
+    "supertest": "^6.3.3"
+  },
+  "optionalDependencies": {
+    "mongodb-memory-server": "^8.12.0"
   },
   "_moduleAliases": {
     "@error": "./errors/ApiError",

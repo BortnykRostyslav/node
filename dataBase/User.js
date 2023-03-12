@@ -1,11 +1,9 @@
 const rolesEnum = require('../configs/roles.enum');
 const mongoose = require('mongoose');
+const { oauthService } = require('../services');
 
 
-const secureFields = [
-    'password'
-];
-
+const secureFields = ['password'];
 
 const UserSchema = new mongoose.Schema({
         firstName: {type: String, trim: true, default: ' '},
@@ -58,5 +56,27 @@ UserSchema.virtual('mainPhoto', {
 UserSchema.pre(/^find/, function() {
     this.populate('mainPhoto');
 });
+
+UserSchema.statics = { // for schema
+    myFirstStatic() {
+        console.log(this); // this - schema
+    },
+
+    async saveUserWithHashPassword(userObject) {
+        const hashPassword = await oauthService.hashPassword(userObject.password);
+
+        return this.create({ ...userObject, password: hashPassword });
+    }
+};
+
+UserSchema.methods = { // for document
+    myFirstMethod() {
+        console.log(this); /// this - document
+    },
+
+    async checkIsPasswordsSame(passwordToCheck) {
+        await oauthService.checkPassword(this.password, passwordToCheck);
+    }
+};
 
 module.exports = mongoose.model('User', UserSchema);
